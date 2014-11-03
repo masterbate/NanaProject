@@ -80,7 +80,8 @@ class AccountPage(Resource):
                 oldStamp = self.timestamp2user[user]
                 newStamp = time.time()
                 stampDifference = newStamp - oldStamp
-                if stampDifference > 86430:
+                #if stampDifference > 86430:
+                if stampDifference > 60:
                     print 'Starting Daily Nanas for: %s' % user
                     self.loginStamp(user)
             time.sleep(10)
