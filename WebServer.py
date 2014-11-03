@@ -72,7 +72,7 @@ class AccountPage(Resource):
     def __init__(self):
         self.a = Appnada.Appnada()
         self.timestamp2user = {}
-        self.dailyThread = thread.start_new_thread()
+        self.dailyThread = thread.start_new_thread(self.dailyNanaThread, () )
         
     def dailyNanaThread(self):
         while True:
