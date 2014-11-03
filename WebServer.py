@@ -76,7 +76,7 @@ class AccountPage(Resource):
         
     def dailyNanaThread(self):
         while True:
-            user in self.timestamp2user.keys():
+            for user in self.timestamp2user.keys():
                 oldStamp = self.timestamp2user[user]
                 newStamp = time.time()
                 stampDifference = newStamp - oldStamp
