@@ -53,9 +53,11 @@ class FormPage(Resource):
             for line in lines:
                 userAndPass = line.split(':')
                 if not len(userAndPass) == 2:
+                    print 'Login array exception occured:'
+                    print userAndPass
                     return 'False'
-                rusername = userAndpass[0]
-                rpassword = userAndpass[1]
+                rusername = userAndPass[0]
+                rpassword = userAndPass[1]
                 if rusername.rstrip() == str(username) and rpassword.rstrip() == str(password):
                     Manager.loggedIn = sender.getSession().uid
                     Manager.session2user[sender.getSession().uid] =  username
