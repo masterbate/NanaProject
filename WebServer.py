@@ -58,7 +58,8 @@ class FormPage(Resource):
                     return False
                 rusername = userAndPass[0]
                 rpassword = userAndPass[1]
-                if rusername.rstrip() == str(username) and rpassword.rstrip() == str(password):
+                print str(rpassword.rstrip()) + ' ' + str(password.rstrip())
+                if str(rusername.rstrip()) == str(username.rstrip()) and str(rpassword.rstrip()) == str(password.rstrip()):
                     Manager.loggedIn = sender.getSession().uid
                     Manager.session2user[sender.getSession().uid] =  username
                     return True
