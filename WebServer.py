@@ -58,11 +58,11 @@ class FormPage(Resource):
                     return False
                 rusername = userAndPass[0]
                 rpassword = userAndPass[1]
-                print 'Using %s' % rusername + ' %s' % rpassword
                 if rusername.rstrip() == str(username) and rpassword.rstrip() == str(password):
                     Manager.loggedIn = sender.getSession().uid
                     Manager.session2user[sender.getSession().uid] =  username
                     return True
+            print 'Invalid credentials!'
             return False
                     
 class AccountPage(Resource):
