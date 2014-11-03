@@ -51,7 +51,11 @@ class FormPage(Resource):
         with open('DB/Users.db', 'r') as db:
             lines = db.readlines()
             for line in lines:
-                rusername, rpassword = line.split(':')
+                userAndPass = line.split(':')
+                if not len(userAndPass) == 2:
+                    return 'False'
+                rusername = userAndpass[0]
+                rpassword = userAndpass[1]
                 if rusername.rstrip() == str(username) and rpassword.rstrip() == str(password):
                     Manager.loggedIn = sender.getSession().uid
                     Manager.session2user[sender.getSession().uid] =  username
