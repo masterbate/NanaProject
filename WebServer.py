@@ -9,6 +9,7 @@ import hashlib
 import json
 
 import thread
+import time
 import os
 
 loginPage = '<div id="login_form"><form name="f1" method="post" id="f1"><table><tr><td class="f1_label">User Name :</td><td><input type="text" name="username" value="" /></td></tr><tr><td class="f1_label">Password  :</td><td><input type="password" name="password" value=""  /></td></tr><tr><td><input type="submit" name="method" value="login" style="font-size:18px; " /></td></tr></table></form></div>'
@@ -19,6 +20,7 @@ class Manager:
     def __init__(self):
         self.session2user = {}
         self.loggedIn = []
+        self.timestamp2user = {}
         print 'Manager running'
 
 Manager = Manager()
@@ -69,6 +71,19 @@ class AccountPage(Resource):
     
     def __init__(self):
         self.a = Appnada.Appnada()
+        self.timestamp2user = {}
+        self.dailyThread = thread.start_new_thread()
+        
+    def dailyNanaThread(self):
+        while True:
+            user in self.timestamp2user.keys():
+                oldStamp = self.timestamp2user[user]
+                newStamp = time.time()
+                stampDifference = newStamp - oldStamp
+                if stampDifference > 86430:
+                    print 'Starting Daily Nanas for: %s' % user
+                    self.loginStamp(user)
+            time.sleep(10)
     
     def render_GET(self, request):
         if not request.getSession().uid in Manager.loggedIn:
@@ -133,6 +148,21 @@ class AccountPage(Resource):
         for account in accounts:
             formatted = account.rstrip()
             self.a.login(formatted)
+        #generate a timestamp
+        self.timestamp2user[username] = time.time()
+        print 'Finished login thread for %s' % username
+        return True
+        
+    def loginStamp(self, username):
+        print 'Getting Daily nanas for %s' % username
+        fileName = username + '.appnana'
+        with open('DB/' + fileName, 'r') as f:
+            accounts = f.readlines()
+        for account in accounts:
+            formatted = account.rstrip()
+            self.a.login(formatted)
+        #generate a timestamp
+        self.timestamp2user[username] = time.time()
         print 'Finished login thread for %s' % username
         return True
         
