@@ -73,6 +73,13 @@ class AccountPage(Resource):
         self.a = Appnada.Appnada()
         self.timestamp2user = {}
         self.dailyThread = thread.start_new_thread(self.dailyNanaThread, () )
+        self.infoThread = thread.start_new_thread(self.infoUpdateThread, () )
+        
+    def infoUpdateThread(self):
+        while True:
+            print 'Currently authenticated connections: %s' % len(Manager.loggedIn)
+            time.sleep(20)
+            
         
     def dailyNanaThread(self):
         while True:
