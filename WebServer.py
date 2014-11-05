@@ -61,7 +61,7 @@ class FormPage(Resource):
                 rusername = userAndPass[0]
                 rpassword = userAndPass[1]
                 if str(rusername.rstrip()) == str(username.rstrip()) and str(rpassword.rstrip()) == str(password.rstrip()):
-                    Manager.loggedIn = sender.getSession().uid
+                    Manager.loggedIn.append(sender.getSession().uid)
                     Manager.session2user[sender.getSession().uid] =  username
                     return True
             print 'Invalid credentials!'
