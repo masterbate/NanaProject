@@ -49,6 +49,9 @@ class FormPage(Resource):
     def handleLogin(self, request, sender):
         username = request['username'][0]
         password = request['password'][0]
+        print username
+        print password
+        return loginPage
         password = self.hashPassword(password)
         with open('DB/Users.db', 'r') as db:
             lines = db.readlines()
