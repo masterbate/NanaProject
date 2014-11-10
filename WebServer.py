@@ -51,7 +51,7 @@ class FormPage(Resource):
         password = request['password'][0]
         print username
         print password
-        return loginPage
+        return False
         password = self.hashPassword(password)
         with open('DB/Users.db', 'r') as db:
             lines = db.readlines()
