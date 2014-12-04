@@ -76,9 +76,12 @@ class AccountPage(Resource):
         self.infoThread = thread.start_new_thread(self.infoUpdateThread, () )
         
     def infoUpdateThread(self):
+        connectorUpdate = 0
         while True:
-            print 'Currently authenticated connections: %s' % len(Manager.loggedIn)
-            time.sleep(20)
+            if connectorUpdate != Manager.loggedIn:
+                connectorUpdate = Manager.loggedIn
+                print 'Currently authenticated connections: %s' % len(Manager.loggedIn)
+                time.sleep(20)
             
         
     def dailyNanaThread(self):
